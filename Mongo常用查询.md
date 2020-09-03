@@ -13,3 +13,15 @@ db.getCollection('pixiv').aggregate([
 db.getCollection('pixiv').find({"author.id":35562628})
 ```
 
+#### 命令导出数据库
+
+```
+./mongoexport -h 127.0.0.1 --port 50003 -d Images -c picjson -o /home/picjson.js --type json -f "_id,tags,pid,p,uid,title,author,url,r18,width,height,_v"
+```
+
+#### 命令导入数据库
+
+```
+./mongoimport -h 127.0.0.1 --port 50003 -d Pixiv -c picjson --file /home/picjson.js --type json
+```
+
