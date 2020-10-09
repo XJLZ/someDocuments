@@ -1,3 +1,13 @@
+---
+title: Linux安装MongoDB
+date: 2020-08-10 15:32:00
+tags:
+- mongo
+- linux
+---
+
+
+
 ## 1.下载
 
 　　官方下载地址：https://www.mongodb.com/download-center/community
@@ -6,7 +16,7 @@
 
 ### 　　1.使用工具（FileZilla）上传至服务器
 
-　　![img](https://img2018.cnblogs.com/blog/1253415/201903/1253415-20190315144304044-156689136.png)
+　　![img](https://i.loli.net/2020/08/10/1EluM4Qy2CVPpZ6.png)
 
 ### 　　2.解压安装
 

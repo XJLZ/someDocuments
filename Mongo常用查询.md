@@ -1,3 +1,12 @@
+---
+title: Mongo常用查询
+date: 2020-08-10 15:32:00
+tags:
+- mongodb
+---
+
+
+
 #### 查询并显示集合中的数据
 
 ```javascript

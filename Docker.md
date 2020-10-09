@@ -1,8 +1,16 @@
+---
+title: Docker
+date: 2020-10-10 15:32:00
+tags:
+- Centos7
+- Docker
+---
+
+
+
 # 安装&配置
 
-## 镜像加速
-
-![1552711014072](C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\1552711014072.png)
+## 
 
 ## 常用命令
 
@@ -19,9 +27,11 @@ docker image ls -a
 #运行容器
 docker run [镜像]
 
-下面的命令则启动一个 bash 终端，允许用户进行交互。
-docker run -t -i ubuntu:18.04 /bin/bash
-root@af8bae53bdd3:/#
+#查看正在运行的容器
+docker ps
+
+#进入交互界面
+docker exec -it 【短ID】 /bin/bash
 
 #查找镜像
 docker search [镜像]
@@ -42,6 +52,9 @@ docker image rm 【短ID】
 
 #若需要删除所有仓库名为 redis 的镜像：
 docker image rm $(docker image ls -q redis)
+
+#查看容器信息
+docker inspect 【短ID】
 ```
 
 ### MySQL
@@ -64,7 +77,7 @@ docker pull mysql:8.0.12
 --restart=always 当docker重启时，该容器自动重启
 
 
-#进入容器ss
+#进入容器
 docker exec -it mysql bash
 
 #登录mysql
@@ -227,18 +240,59 @@ $  ./src/redis-server ./redis.conf
 ### Tomcat
 
 ```
+#拉取镜像
+	docker pull tomcat  默认是最新的
+	docker pull tomcat:8  指定版本
 # 启动
-
-	docker run -it --rm -p 8888:8080 tomcat
+	docker run -it --rm -p 8888:8080 tomcat  打印日志
+	docker run -it -d -p 8888:8080 tomcat:8  指定版本且后台启动
+# 访问
+	ip:8888
+####如果出现404，则
+	使用命令: docker exec -it 运行的tomcat容器ID /bin/bash 进入到tomcat的目录
+	使用命令: ls -l 发现有webapps 和 webapps.dist 两个文件夹
+	查看webapps 文件夹，发现里面没有文件，而 webapps.dist 里面有文件
+	使用过tomcat的都应该知道，webapps是tomcat存放静态资源的目录
+	只要把webapps.dist重命名为webapps就好了
+	 mv webapps webapps2
+	 mv webapps.dist/ webapps
+	再次访问就ok了
 ```
+
+![image-20200930104659743](https://i.loli.net/2020/09/30/tFSDfVOzy4l7MqY.png)
+
+```
+#复制tomcat配置文件和webapps
+	 docker cp 【短ID】:/usr/local/tomcat/conf /home/data/tomcat
+	 docker cp 【短ID】:/usr/local/tomcat/conf/webapps /home/data/tomcat
+#挂载目录启动	  
+	docker run -d --name mytomcat -p 8888:8080 -v /home/data/tomcat/conf/:/usr/local/tomcat/conf/ -v /home/data/tomcat/webapps/:/usr/local/tomcat/webapps/ tomcat
+```
+
+
 
 ### Nginx
 
 ```
-# 编辑配置文件
-	vim /usr/local/nginx/conf/nginx.conf
-# Reload
-	/usr/local/nginx/sbin/nginx -s reload
+#获取nginx
+	docker pull nginx
+#运行
+	docker run -id -p 82:80 nginx
+#访问
+	ip:82
+#重启
+	docker restart 【短ID】
+#停止
+	docker stop 【短ID】
+#复制配置文件夹到服务器---(/home/data需要自己创建)
+    docker cp 【短ID】:/etc/nginx /home/data
+    docker cp ea14a70c74ab:/etc/nginx /home/data
+#挂载容器目录启动nginx容器
+	docker run -id --name mynginx -v /home/data/nginx:/etc/nginx -p 82:80 nginx
+#挂载静态资源目录 (/home/data/web)
+	docker run -id --name mynginx -v /home/data/nginx:/etc/nginx -v /home/data/web:/home/data/web -p 82:80 nginx
+#访问
+	ip:82
 ```
 
 ### MinIO Docker
