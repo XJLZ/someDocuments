@@ -7,7 +7,7 @@ tags:
 
 
 
-#### 查询并显示集合中的数据 3222
+#### 查询并显示集合中的数据
 
 ```javascript
 db.getCollection('pixiv').aggregate([
