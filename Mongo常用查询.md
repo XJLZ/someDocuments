@@ -16,7 +16,7 @@ db.getCollection('pixiv').aggregate([
 ])
 ```
 
-#### 查询条件为数据中对象某个属性值
+#### 查询条件为数据中对象某个属性值 2333
 
 ```javascript
 db.getCollection('pixiv').find({"author.id":35562628})
