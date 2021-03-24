@@ -10,13 +10,13 @@ tags:
 
 # 安装&配置
 
-## 
-
 ## 常用命令
 
 ### 基本命令
 
 ```
+#启动服务
+systemctl start docker
 #获取镜像
 docker  pull [镜像:xx.xx]
 //docker pull mysql:8.0.12
@@ -302,8 +302,8 @@ $  ./src/redis-server ./redis.conf
 	docker pull minio/minio
 
 # 启动
-    docker run -p 50005:9000 -d --name minio \
-      -v /var/ftp/pub/Photo/imgs/minio:/data \
+    docker run -p 9000:9000 -d --name minio \
+      -v /home/Photo:/data \
       -v /mnt/config:/root/.minio \
       minio/minio server /data
 # 默认用户密码 

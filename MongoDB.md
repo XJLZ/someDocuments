@@ -25,7 +25,7 @@ tags:
 移动：mv ./mongodb-linux-x86_64-4.0.6 /usr/local/mongodb
 ```
 
-　　![img](https://img2018.cnblogs.com/blog/1253415/201903/1253415-20190315144629293-243768918.png)
+　　![img](https://i.loli.net/2020/12/18/glJos1c4pRftZeq.png)
 
 ## 3.配置conf与目录
 
@@ -35,7 +35,7 @@ tags:
 cd /usr/local/mongodb/
 ```
 
-　　　　![img](https://img2018.cnblogs.com/blog/1253415/201903/1253415-20190315145017284-1028054786.png)
+　　　　![img](https://i.loli.net/2020/12/18/uta8KDdAFbHUhep.png)
 
 ### 　　2.创建db目录和日志文件　　
 
@@ -45,7 +45,7 @@ mkdir -p ./logs
 touch ./logs/mongodb.log
 ```
 
-　　　　![img](https://img2018.cnblogs.com/blog/1253415/201903/1253415-20190315145325509-1623167612.png)
+　　　　![img](https://i.loli.net/2020/12/18/KJgWeotVpI2Da35.png)
 
 ### 　　3.创建mongodb.conf文件
 
@@ -74,7 +74,7 @@ bind_ip=0.0.0.0
 ./bin/mongod --config mongodb.conf
 ```
 
- 　![img](https://img2018.cnblogs.com/blog/1253415/201903/1253415-20190315150104231-1845968800.png)
+ 　![img](https://i.loli.net/2020/12/18/xtuVGrRTWA1BelK.png)
 
 ### 　　2.连接　
 
@@ -83,9 +83,9 @@ bind_ip=0.0.0.0
 ./bin/mongo localhost:23234  --指定端口，需要与配置的端口号一致
 ```
 
-　　![img](https://img2018.cnblogs.com/blog/1253415/201903/1253415-20190315150455580-93719054.png)
+　　![img](https://i.loli.net/2020/12/18/F8DEWIfRJ9d7C4i.png)
 
-### 　　3.测试　　![img](https://img2018.cnblogs.com/blog/1253415/201903/1253415-20190315152856246-931789177.png)
+### 　　3.测试　　![img](https://i.loli.net/2020/12/18/xIGOgkawAnuHLlQ.png)
 
 ## 5.配置mongodb服务开机启动
 
@@ -103,9 +103,9 @@ After=network.target remote-fs.target nss-lookup.target
 
 [Service]
 Type=forking
-ExecStart=/usr/local/mongodb/bin/mongod --config /usr/local/mongodb/mongodb.conf
+ExecStart=/usr/local/mongodb/mongodb/bin/mongod --config /usr/local/mongodb/mongodb/mongodb.conf
 ExecReload=/bin/kill -s HUP $MAINPID
-ExecStop=/usr/local/mongodb/bin/mongod --shutdown --config /usr/local/mongodb/mongodb.conf
+ExecStop=/usr/local/mongodb/mongodb/bin/mongod --shutdown --config /usr/local/mongodb/mongodb/mongodb.conf
 PrivateTmp=true
 
 [Install]

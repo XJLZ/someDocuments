@@ -22,6 +22,14 @@ db.getCollection('pixiv').aggregate([
 db.getCollection('pixiv').find({"author.id":35562628})
 ```
 
+##### 模糊查询
+
+```
+db.getCollection('pixiv').find({"author.name":/Rella/})
+```
+
+
+
 #### 命令导出数据库
 
 ```

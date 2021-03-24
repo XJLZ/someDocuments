@@ -118,21 +118,20 @@ Jul 15 18:59:14 centos systemd[1]: Started RabbitMQ broker.
 Jul 15 18:59:14 centos rabbitmq-server[29006]: completed with 0 plugins.
 ```
 
-##### 修改防火墙和SE[Linux](https://www.linuxprobe.com/)规则
-
-如果您已安装并运行防火墙 ，则必须通过防火墙允许端口8161。 运行以下命令相同。
-
-或者直接关闭防火墙  **systemctl stop firewalld.service**
+##### 修改防火墙和[SELinux规则](/2020/08/10/SELinux/)
 
 ```
-firewall-cmd –zone=public –permanent –add-port=4369/tcp
-firewall-cmd –zone=public –permanent –add-port=25672/tcp
-firewall-cmd –zone=public –permanent –add-port=5671-5672/tcp
-firewall-cmd –zone=public –permanent –add-port=15672/tcp
-firewall-cmd –zone=public –permanent –add-port=61613-61614/tcp
-firewall-cmd –zone=public –permanent –add-port=1883/tcp
-firewall-cmd –zone=public –permanent –add-port=8883/tcp
-firewall-cmd –reload
+
+#放行5672和15672两个端口，（--permanent表示永久生效，没有此参数重启后失效）
+firewall-cmd --zone=public --add-port=5672/tcp --permanent
+ 
+firewall-cmd --zone=public --add-port=15672/tcp --permanent
+ 
+#重载防火墙是设置生效
+firewall-cmd --reload
+ 
+#查看放行端口列表，此时列表显示如下图
+firewall-cmd --list-all
 ```
 
 如果您启用SELinux，则必须运行以下命令以允许RabbitMQ服务。
@@ -158,8 +157,13 @@ chown -R rabbitmq:rabbitmq /var/lib/rabbitmq/
 现在，您将需要为RabbitMQ Web管理控制台创建管理用户。 运行以下命令相同。
 
 ```
-rabbitmqctl add_user admin StrongPassword
+#查看当前用户列表
+rabbitmqctl list_users
+#添加admin用户，用户名和密码都为admin 
+rabbitmqctl add_user admin admin
+#设置admin的角色为administrator
 rabbitmqctl set_user_tags admin administrator
+#设置admin用户的权限，可访问所有
 rabbitmqctl set_permissions -p / admin “.*” “.*” “.*”
 修改密码
 rabbitmqctl  change_password  admin  'Newpassword'

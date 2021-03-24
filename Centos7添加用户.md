@@ -66,6 +66,8 @@ mode of "/etc/sudoers" changed from 0440 (r--r-----) to 0640 (rw-r-----)
 ## Allow root to run any commands anywher  
 root    ALL=(ALL)       ALL  
 linuxidc  ALL=(ALL)       ALL  #这个是新增的用户
+ 默认5分钟后刚才输入的sudo密码过期，下次sudo需要重新输入密码，如果觉得在sudo的时候输入密码麻烦，把刚才的输入换成如下内容即可：
+linuxidc ALL=(ALL) NOPASSWD:ALL
 ```
 
 wq保存退出，这时候要记得将写权限收回：

@@ -28,25 +28,23 @@ tags:
 
 root用户登录虚拟机，输入以命令，编辑保存
 
-
-
-
-
-
-
 ```
 vi /etc/sysconfig/network-scripts/ifcfg-ens33
 
+BOOTPROTO="static"
 ONBOOT=yes
 IPADDR=192.168.186.130
 METMASK=255.255.255.0
 GATEWAY=192.168.186.2
 DNS=8.8.8.8
+
+vi /etc/resolv.conf 编辑DNS，填入网关的IP
+nameserver 192.168.190.2
 ```
 
 
 
-![1](D:\Photos\5.jpg)
+
 
 输入一下命令，重启network
 
