@@ -33,3 +33,10 @@ MD5:82:AD:9F:60:10:4F:AD:4A:83:7F:70:AA:C2:A7:2B:C8
 
 [Anaconda清华镜像源的使用及安装P]: https://blog.csdn.net/WannaSeaU/article/details/88427010
 
+[SpringCloud面试题（总结最全面]: https://juejin.cn/post/6844904125717544973
+
+
+
+
+
+cd /mnt/data/book-info-temp/imageResources/imageData/202103291956 && tar zcvf Centos7.tar.gz Centos7 && zip -r Windows.zip Windows && tar zcvf /mnt/data/book-info-temp/imageResources/zip/202103291956_1.tar.gz Centos7.tar.gz Windows.zip
